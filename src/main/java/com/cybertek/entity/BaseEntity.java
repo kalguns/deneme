@@ -18,8 +18,6 @@ public class BaseEntity {
     private Long insertUserId;
     private LocalDateTime lastUpdateDateTime;
     private Long lastUpdateUserId;
-    private Long lastUpdateUserId1;
-    private Long lastUpdateUserId2;
-    private Long lastUpdateUserId3;
+
 
 }
