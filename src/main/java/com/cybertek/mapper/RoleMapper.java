@@ -1,4 +1,4 @@
-package com.cybertek;
+package com.cybertek.mapper;
 
 import org.modelmapper.ModelMapper;
 
