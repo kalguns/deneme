@@ -37,8 +37,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User save(UserDTO dto) {
-        return null;
+    public void save(UserDTO dto) {
+        User obj = userMapper.convertToEntity(dto);
+        userRepository.save(obj);
     }
 
     @Override
