@@ -62,4 +62,10 @@ public class UserServiceImp implements UserService {
     public void delete(String username) {
 
     }
+
+    //Hard delete
+    @Override
+    public void deleteByUserName(String username) {
+        userRepository.deleteByUserName(username);
+    }
 }
