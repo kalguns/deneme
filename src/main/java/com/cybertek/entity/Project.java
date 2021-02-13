@@ -16,7 +16,11 @@ import java.time.LocalDate;
 @Setter
 @Where(clause = "is_deleted=false")
 public class Project extends  BaseEntity{
+
+    @Column(unique = true)
     private String projectCode;
+
+
     private String projectName;
 
     @ManyToOne(fetch = FetchType.LAZY)
