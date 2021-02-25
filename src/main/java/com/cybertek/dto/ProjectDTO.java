@@ -31,5 +31,10 @@ public class ProjectDTO {
     private int completeTaskCounts;
     private int unfinishedTaskCounts;
 
+    private int completeTaskCounts1;
+    private int unfinishedTaskCounts1;
+    private int completeTaskCounts2;
+    private int unfinishedTaskCounts2;
+
 
 }
