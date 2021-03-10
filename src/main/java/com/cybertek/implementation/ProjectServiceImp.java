@@ -9,6 +9,7 @@ import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.ProjectRepository;
 import com.cybertek.service.ProjectService;
+import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,14 @@ public class ProjectServiceImp implements ProjectService {
     private ProjectRepository projectRepository;
     private UserMapper userMapper;
     private UserService userService;
+    private TaskService taskService;
 
-    public ProjectServiceImp(ProjectMapper projectMapper, ProjectRepository projectRepository, UserMapper userMapper, UserService userService) {
+    public ProjectServiceImp(ProjectMapper projectMapper, ProjectRepository projectRepository, UserMapper userMapper, UserService userService, TaskService taskService) {
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
         this.userMapper = userMapper;
         this.userService = userService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -83,8 +86,11 @@ public class ProjectServiceImp implements ProjectService {
         UserDTO currentUserDTO = userService.findByUserName("aaa@gmail.com");
         User user = userMapper.convertToEntity(currentUserDTO);
         List<Project> list = projectRepository.findAllByAssignedManager(user);
+
         return list.stream().map(project -> {
             ProjectDTO obj = projectMapper.convertToDto(project);
+            obj.setCompleteTaskCounts(taskService.totalNonCompletedTasks(project.getProjectCode()));
+            obj.setCompleteTaskCounts(taskService.totalCompletedTasks(project.getProjectCode()));
             return obj;
         }).collect(Collectors.toList());
     }
